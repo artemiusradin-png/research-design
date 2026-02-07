@@ -1,0 +1,26 @@
+project:
+  type: default
+
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: show
+    fig-width: 10
+    fig-height: 6
+    theme: cosmo
+    mermaid:
+      theme: default
+      init: true
+  pdf:
+    toc: true
+    number-sections: true
+    fig-width: 6
+    fig-height: 4
+
+execute:
+  echo: false
+  eval: false
+  warning: false
+  message: false

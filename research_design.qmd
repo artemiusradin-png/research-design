@@ -1,0 +1,402 @@
+---
+title: "Redistribution, Equity, and Efficiency: A Comparative Analysis of China and Canada"
+subtitle: "Research Design Document"
+author: "Artemis Radin"
+date: today
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-fold: show
+    fig-width: 10
+    fig-height: 6
+    theme: cosmo
+  pdf:
+    toc: true
+    number-sections: true
+    fig-width: 6
+    fig-height: 4
+---
+
+**Research Supervisor:** Mark Hup
+
+# Research Question
+
+**How are changes in government redistribution (social protection spending) associated with inequality, poverty, and efficiency outcomes in China and Canada from 2000–2023?**
+
+## Research Design Overview
+
+<div id="fig-research-design">
+<figure>
+<pre class="mermaid">
+graph TB
+    A[Research Question] --> B[Unit of Analysis]
+    A --> C[Time Window]
+    A --> D[Core Variables]
+    
+    B --> B1[Country-Year]
+    B --> B2[China & Canada]
+    B --> B3[Annual Frequency]
+    
+    C --> C1[2000-2023]
+    C --> C2[Subject to Data Availability]
+    
+    D --> D1[Redistribution X]
+    D --> D2[Equity Outcomes Y1]
+    D --> D3[Efficiency Outcomes Y2]
+    D --> D4[Controls]
+    
+    D1 --> D1a[Social Protection % GDP]
+    D2 --> D2a[Gini Index]
+    D2 --> D2b[Poverty Rate]
+    D3 --> D3a[GDP Growth]
+    D3 --> D3b[Employment Rate]
+    
+    style A fill:#e1f5ff
+    style D1 fill:#fff4e1
+    style D2 fill:#ffe1f5
+    style D3 fill:#e1ffe1
+</pre>
+<figcaption>Figure 1: Research Design Overview: Components and Structure</figcaption>
+</figure>
+</div>
+
+See @fig-research-design (Figure 1) for the research design structure.
+
+# Unit of Analysis
+
+- **Unit**: Country–year
+- **Countries**: China, Canada
+- **Frequency**: Annual panel
+- **Time Window**: 2000–2023 (subject to actual data availability)
+
+# Core Variables
+
+## Redistribution (Independent Variable X)
+
+**Variable**: `transfers_gdp`
+
+- **Concept**: Government redistribution via social protection spending
+- **Operational Measure**: Social protection and labor expenditure (% of GDP)
+- **Scope Choice**: **Social protection only** (no health or education)
+- **Rationale**: Clean, comparable definition using World Bank data
+
+## Equity Outcomes (Dependent Variables Y1)
+
+### Gini Index
+- **Variable**: `gini`
+- **Definition**: GINI index (World Bank estimate)
+- **Note**: Based on income or consumption; will document which for each country
+
+### Poverty Rate
+- **Variable**: `poverty`
+- **Definition**: Poverty headcount ratio at $6.85 a day (2017 PPP) (% of population)
+- **Rationale**: Threshold meaningful for both upper-middle-income (China) and high-income (Canada) countries
+
+## Efficiency Outcomes (Dependent Variables Y2)
+
+### GDP Growth
+- **Variable**: `gdp_growth`
+- **Definition**: GDP growth (annual %)
+
+### Employment Rate
+- **Variable**: `employment`
+- **Definition**: Employment-to-population ratio, 15+ (%), ILO modeled estimate
+
+## Control Variables
+
+To avoid "redistribution correlates with everything," we include a minimal standard set:
+
+1. **GDP per capita** (`gdp_pc`): GDP per capita, constant prices (2015 USD)
+2. **Unemployment rate** (`unemployment`): Unemployment rate (% of labor force), modeled ILO estimate
+3. **Old-age dependency ratio** (`old_age_dep`): Old-age dependency ratio (% of working-age population)
+4. **Inflation** (`inflation`): Inflation, consumer prices (annual %) - optional
+
+## Variable Relationships Diagram
+
+<div id="fig-variable-relationships">
+<figure>
+<pre class="mermaid">
+graph LR
+    X[Redistribution<br/>transfers_gdp] --> Y1[Equity Outcomes]
+    X --> Y2[Efficiency Outcomes]
+    
+    Y1 --> Y1a[Gini Index]
+    Y1 --> Y1b[Poverty Rate]
+    
+    Y2 --> Y2a[GDP Growth]
+    Y2 --> Y2b[Employment Rate]
+    
+    C1[GDP per capita] --> Y1
+    C1 --> Y2
+    C2[Unemployment] --> Y1
+    C2 --> Y2
+    C3[Old-age Dependency] --> Y1
+    C3 --> Y2
+    C4[Inflation] --> Y1
+    C4 --> Y2
+    
+    style X fill:#fff4e1
+    style Y1 fill:#ffe1f5
+    style Y2 fill:#e1ffe1
+    style C1 fill:#f0f0f0
+    style C2 fill:#f0f0f0
+    style C3 fill:#f0f0f0
+    style C4 fill:#f0f0f0
+</pre>
+<figcaption>Figure 2: Variable Relationships: Redistribution, Outcomes, and Controls</figcaption>
+</figure>
+</div>
+
+@fig-variable-relationships illustrates the relationships between redistribution, equity outcomes, efficiency outcomes, and control variables.
+
+# Variable Dictionary
+
+## Core Variables
+
+| Variable Name | Definition | Source | Units | Frequency | Coverage (Years) | Notes |
+|--------------|------------|--------|-------|-----------|------------------|-------|
+| `country` | Country identifier (China or Canada) | Constructed | Categorical (CHN, CAN) | Annual | 2000–2023 | ISO codes |
+| `year` | Calendar year | Constructed | Integer | Annual | 2000–2023 | — |
+| `transfers_gdp` | Social protection and labor expenditure as % of GDP | World Bank | Percent of GDP | Annual | TBD | Indicator code: [to be filled] |
+| `gini` | Gini index (WB estimate, based on income/consumption) | World Bank | Index (0–100) | Annual/intermittent | TBD | Note: income vs consumption basis per country |
+| `poverty` | Poverty headcount at $6.85/day (2017 PPP) (% of population) | World Bank | Percent of population | Annual | TBD | Indicator code: [to be filled] |
+| `gdp_growth` | Annual real GDP growth rate | World Bank | Percent (year-on-year) | Annual | 2000–2023 | Constant price base year: [to be filled] |
+| `employment` | Employment-to-population ratio, 15+ | World Bank / ILO modeled | Percent | Annual | TBD | Definition consistency check needed |
+
+## Control Variables
+
+| Variable Name | Definition | Source | Units | Frequency | Coverage (Years) | Notes |
+|--------------|------------|--------|-------|-----------|------------------|-------|
+| `gdp_pc` | GDP per capita, constant prices (2015 USD) | World Bank | USD (constant) | Annual | TBD | Base year: 2015 |
+| `unemployment` | Unemployment rate (% of labor force) | World Bank / ILO | Percent | Annual | TBD | Model-based vs survey differences |
+| `old_age_dep` | Old-age dependency ratio (% of working-age pop.) | World Bank | Percent | Annual | TBD | Age cutoffs: 65+ over 15–64 |
+| `inflation` | Inflation, consumer prices (annual %) | World Bank | Percent | Annual | TBD | High-inflation years to note |
+
+# Empirical Design
+
+## Data Structure
+
+- **Panel**: 2 countries × ~24 years (maximum 48 observations)
+- **Missingness**: Transparently documented in variable dictionary
+- **Primary Source**: World Bank (for consistency and reproducibility)
+- **Supplemental Sources**: National statistics (stats.gov.cn, data.gov) only if key measures are missing
+
+## Analysis Structure
+
+<div id="fig-analysis-structure">
+<figure>
+<pre class="mermaid">
+graph TD
+    A[Data Collection] --> B[Descriptive Analysis]
+    B --> C[Regression Analysis]
+    C --> D[Sensitivity Checks]
+    
+    B --> B1[Time-Series Plots]
+    B --> B2[Period Averages]
+    B --> B3[Correlations]
+    
+    C --> C1[Panel with Country FE]
+    C --> C2[Alternative: Country-Specific TS]
+    
+    D --> D1[Lagged Transfers]
+    D --> D2[Alternative Inequality Measures]
+    D --> D3[Drop Crisis Years]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff4e1
+    style C fill:#ffe1f5
+    style D fill:#e1ffe1
+</pre>
+<figcaption>Figure 3: Analysis Structure: Three-Layer Approach</figcaption>
+</figure>
+</div>
+
+The analysis follows a three-layer structure as shown in @fig-analysis-structure.
+
+## Descriptive Layer
+
+1. **Time-series plots (2000–2023)** for each country:
+   - `transfers_gdp`
+   - `gini`
+   - `poverty`
+   - `gdp_growth`
+   - `employment`
+
+2. **Period averages** (China vs Canada):
+   - 2000–2009
+   - 2010–2019
+   - 2020–2023
+
+3. **Simple correlations** between `transfers_gdp` and each outcome variable
+
+## Regression Layer
+
+### Main Specification: Panel with Country Fixed Effects
+
+\[
+Y_{ct} = \alpha + \beta \text{Transfers}_{ct} + \gamma' \text{Controls}_{ct} + \mu_c + \varepsilon_{ct}
+\]
+
+where:
+- \(Y_{ct}\) is the outcome (`gini`, `poverty`, `gdp_growth`, or `employment`)
+- \(c \in \{\text{China, Canada}\}\)
+- \(\mu_c\) are country fixed effects
+
+### Alternative Specification: Country-Specific Time Series
+
+Run separate regressions for China and Canada, then compare estimated \(\beta\) coefficients across countries.
+
+**Note on Year Fixed Effects**: With only 2 countries, year fixed effects absorb common shocks and much of the variation. If included, explain what they capture.
+
+## Sensitivity Checks
+
+1. **Lagged transfers**: Use `transfers_gdp` lagged by one year
+2. **Alternative inequality measures**: Compare results using `gini` vs `poverty`
+3. **Crisis years**: Drop 2008–2009 and 2020, check if coefficients change meaningfully
+
+# Claim Scope
+
+**Important**: All results are **associational** and do **not** identify causal effects of redistribution on inequality or efficiency. The goal is to document patterns and compare China and Canada, not to claim causal treatment effects.
+
+# Research Timeline
+
+<div id="fig-timeline">
+<figure>
+<pre class="mermaid">
+gantt
+    title Research Timeline (6 Weeks)
+    dateFormat  YYYY-MM-DD
+    section Week 1
+    Design Note           :a1, 2024-01-01, 3d
+    Variable Dictionary   :a2, after a1, 2d
+    Data Plan             :a3, after a2, 2d
+    
+    section Week 2
+    Data Collection       :b1, after a3, 3d
+    Data Cleaning         :b2, after b1, 2d
+    First Plots           :b3, after b2, 2d
+    
+    section Week 3
+    Descriptive Analysis  :c1, after b3, 5d
+    Write Descriptives    :c2, after c1, 2d
+    
+    section Week 4
+    Regression Analysis   :d1, after c2, 3d
+    Robustness Checks    :d2, after d1, 2d
+    
+    section Week 5
+    Full First Draft      :e1, after d2, 5d
+    
+    section Week 6
+    Revisions             :f1, after e1, 3d
+    Final Polish          :f2, after f1, 2d
+</pre>
+<figcaption>Figure 4: Research Timeline: 6-Week Schedule</figcaption>
+</figure>
+</div>
+
+@fig-timeline shows the 6-week research timeline with key milestones.
+
+## Detailed Timeline
+
+| Week | Tasks | Deliverables |
+|------|-------|--------------|
+| **Week 1** | Design note + variable dictionary + data plan | One-page design note, variable dictionary table |
+| **Week 2** | Dataset assembled + first plots | Clean dataset, 3 initial plots (transfers, Gini, GDP growth) |
+| **Week 3** | Descriptives written | 2–3 pages of descriptive analysis |
+| **Week 4** | Regressions + robustness | Regression tables, sensitivity check results |
+| **Week 5** | Full first draft | Complete paper draft |
+| **Week 6** | Revisions + final polish | Final paper |
+
+# Paper Outline
+
+1. **Introduction + Research Question**
+   - Motivation
+   - Research question
+   - Contribution
+
+2. **Concepts & Measurement**
+   - Definition of redistribution
+   - Equity outcomes: Gini and poverty
+   - Efficiency outcomes: GDP growth and employment
+   - Control variables
+
+3. **Data**
+   - Sources (World Bank primary, national sources if needed)
+   - Coverage and missingness
+   - Descriptive statistics
+
+4. **Results: Descriptives**
+   - Time-series plots
+   - Period comparisons
+   - Correlations
+
+5. **Results: Regressions**
+   - Panel regressions with country fixed effects
+   - Alternative: country-specific time series
+   - Interpretation of associations
+
+6. **Discussion**
+   - Trade-off interpretation
+   - China vs Canada institutional context (brief)
+   - Policy implications
+
+7. **Limitations + Conclusion**
+   - Limitations (associational, not causal; small N)
+   - Conclusion and future research
+
+# Data Collection Workflow
+
+<div id="fig-data-workflow">
+<figure>
+<pre class="mermaid">
+flowchart TD
+    Start[Start Data Collection] --> WB[World Bank Data]
+    WB --> Check{Data Complete?}
+    Check -->|Yes| Clean[Data Cleaning]
+    Check -->|No| National[National Sources]
+    National --> Merge[Merge Data]
+    Merge --> Clean
+    Clean --> Validate[Validate Coverage]
+    Validate --> Dict[Update Variable Dictionary]
+    Dict --> Plots[Generate Initial Plots]
+    Plots --> Review[Review with Mark]
+    
+    style Start fill:#e1f5ff
+    style WB fill:#fff4e1
+    style Clean fill:#ffe1f5
+    style Plots fill:#e1ffe1
+</pre>
+<figcaption>Figure 5: Data Collection Workflow</figcaption>
+</figure>
+</div>
+
+The data collection workflow is illustrated in @fig-data-workflow.
+
+# Next Steps (Today)
+
+1. **Fill variable dictionary** with World Bank indicator codes and coverage notes
+2. **Pull World Bank data** for China and Canada (2000–2023) for all variables
+3. **Produce 3 plots**:
+   - Transfers (% GDP) over time (China vs Canada)
+   - Gini index over time (China vs Canada)
+   - GDP growth over time (China vs Canada)
+4. **Send to Mark**: Design note + plots + coverage notes
+
+# Appendix: World Bank Indicator Codes
+
+*To be filled during data collection*
+
+| Variable | World Bank Indicator Code | Notes |
+|----------|---------------------------|-------|
+| `transfers_gdp` | [TBD] | Social protection and labor expenditure |
+| `gini` | [TBD] | Gini index |
+| `poverty` | [TBD] | Poverty at $6.85/day (2017 PPP) |
+| `gdp_growth` | [TBD] | GDP growth (annual %) |
+| `employment` | [TBD] | Employment-to-population ratio |
+| `gdp_pc` | [TBD] | GDP per capita (constant 2015 USD) |
+| `unemployment` | [TBD] | Unemployment rate |
+| `old_age_dep` | [TBD] | Old-age dependency ratio |
+| `inflation` | [TBD] | Inflation, consumer prices |
