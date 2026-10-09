@@ -80,7 +80,11 @@ See @fig-research-design (Figure 1) for the research design structure.
 - **Concept**: Government redistribution via social protection spending
 - **Operational Measure**: Social protection and labor expenditure (% of GDP)
 - **Scope Choice**: **Social protection only** (no health or education)
-- **Rationale**: Clean, comparable definition using World Bank data
+- **Rationale**:
+  - We use one source (World Bank), so China and Canada are measured in the same way.
+  - We focus only on social protection and labor spending, not health or education, to keep the measure focused.
+  - We use **% of GDP**, which makes spending comparable across countries of different size.
+  - The data are easy to trace and replicate because they come from one public database.
 
 ## Equity Outcomes (Dependent Variables Y1)
 
@@ -109,7 +113,7 @@ See @fig-research-design (Figure 1) for the research design structure.
 To avoid "redistribution correlates with everything," we include a minimal standard set:
 
 1. **GDP per capita** (`gdp_pc`): GDP per capita, constant prices (2015 USD)
-2. **Unemployment rate** (`unemployment`): Unemployment rate (% of labor force), modeled ILO estimate
+2. **Trade openness** (`trade_open`): Trade (% of GDP)
 3. **Old-age dependency ratio** (`old_age_dep`): Old-age dependency ratio (% of working-age population)
 4. **Inflation** (`inflation`): Inflation, consumer prices (annual %) - optional
 
@@ -130,7 +134,7 @@ graph LR
     
     C1[GDP per capita] --> Y1
     C1 --> Y2
-    C2[Unemployment] --> Y1
+    C2[Trade openness] --> Y1
     C2 --> Y2
     C3[Old-age Dependency] --> Y1
     C3 --> Y2
@@ -145,11 +149,13 @@ graph LR
     style C3 fill:#f0f0f0
     style C4 fill:#f0f0f0
 </pre>
-<figcaption>Figure 2: Variable Relationships: Redistribution, Outcomes, and Controls</figcaption>
+<figcaption>Figure 2: Primary Analysis Paths (Simplified)</figcaption>
 </figure>
 </div>
 
-@fig-variable-relationships illustrates the relationships between redistribution, equity outcomes, efficiency outcomes, and control variables.
+@fig-variable-relationships illustrates the primary analysis paths used in the baseline model.
+
+**Diagram limitation (important):** For readability, Figure 2 does **not** show all feedback links across variables. In reality, some variables can move together and affect each other (for example, GDP growth and employment; growth and poverty; inflation and poverty). Therefore, this figure is a simplified empirical framework, not a full causal system map.
 
 # Variable Dictionary
 
@@ -170,7 +176,7 @@ graph LR
 | Variable Name | Definition | Source | Units | Frequency | Coverage (Years) | Notes |
 |--------------|------------|--------|-------|-----------|------------------|-------|
 | `gdp_pc` | GDP per capita, constant prices (2015 USD) | World Bank | USD (constant) | Annual | TBD | Base year: 2015 |
-| `unemployment` | Unemployment rate (% of labor force) | World Bank / ILO | Percent | Annual | TBD | Model-based vs survey differences |
+| `trade_open` | Trade (% of GDP) | World Bank | Percent of GDP | Annual | TBD | Sum of exports and imports as share of GDP |
 | `old_age_dep` | Old-age dependency ratio (% of working-age pop.) | World Bank | Percent | Annual | TBD | Age cutoffs: 65+ over 15–64 |
 | `inflation` | Inflation, consumer prices (annual %) | World Bank | Percent | Annual | TBD | High-inflation years to note |
 
@@ -255,6 +261,7 @@ Run separate regressions for China and Canada, then compare estimated \(\beta\) 
 1. **Lagged transfers**: Use `transfers_gdp` lagged by one year
 2. **Alternative inequality measures**: Compare results using `gini` vs `poverty`
 3. **Crisis years**: Drop 2008–2009 and 2020, check if coefficients change meaningfully
+4. **Outcome-specific controls and lag structure**: Do not include near-mechanical controls for the same outcome (for example, no unemployment control in the employment equation), and test lagged controls to reduce simultaneity concerns
 
 # Claim Scope
 
@@ -397,6 +404,6 @@ The data collection workflow is illustrated in @fig-data-workflow.
 | `gdp_growth` | [TBD] | GDP growth (annual %) |
 | `employment` | [TBD] | Employment-to-population ratio |
 | `gdp_pc` | [TBD] | GDP per capita (constant 2015 USD) |
-| `unemployment` | [TBD] | Unemployment rate |
+| `trade_open` | NE.TRD.GNFS.ZS | Trade (% of GDP) |
 | `old_age_dep` | [TBD] | Old-age dependency ratio |
 | `inflation` | [TBD] | Inflation, consumer prices |

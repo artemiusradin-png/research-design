@@ -1,0 +1,26 @@
+graph LR
+    X[Redistribution<br/>transfers_gdp] --> Y1[Equity Outcomes]
+    X --> Y2[Efficiency Outcomes]
+    
+    Y1 --> Y1a[Gini Index]
+    Y1 --> Y1b[Poverty Rate]
+    
+    Y2 --> Y2a[GDP Growth]
+    Y2 --> Y2b[Employment Rate]
+    
+    C1[GDP per capita] --> Y1
+    C1 --> Y2
+    C2[Trade openness] --> Y1
+    C2 --> Y2
+    C3[Old-age Dependency] --> Y1
+    C3 --> Y2
+    C4[Inflation] --> Y1
+    C4 --> Y2
+    
+    style X fill:#fff4e1
+    style Y1 fill:#ffe1f5
+    style Y2 fill:#e1ffe1
+    style C1 fill:#f0f0f0
+    style C2 fill:#f0f0f0
+    style C3 fill:#f0f0f0
+    style C4 fill:#f0f0f0
